@@ -24,51 +24,19 @@ public class CategoryController {
     @Autowired
     UserClient userClient;
 
-    private String token;
-
 
     @GetMapping("")
-    public ResponseEntity<List<Category>> getCategories(@RequestHeader("Authorization")String authHeader) throws UnauthorizedException{
+    public ResponseEntity<List<Category>> getCategories() throws UnauthorizedException{
 
-        this.validateToken(authHeader);
-
-        return new ResponseEntity<>(categoryService.findCategories(token),HttpStatus.OK);
+        return new ResponseEntity<>(categoryService.findCategories(),HttpStatus.OK);
     }
 
     @GetMapping("/{categoryId}")
-    public ResponseEntity<Category> getCategoryById(@RequestHeader("Authorization")String authHeader,
-                                                    @PathVariable("categoryId")Long categoryId) throws UnauthorizedException {
-
-        this.validateToken(authHeader);
+    public ResponseEntity<Category> getCategoryById(@PathVariable("categoryId")Long categoryId) throws UnauthorizedException {
 
         return new ResponseEntity<>(categoryService.findCategoryById(categoryId),HttpStatus.OK);
     }
 
-    public void validateToken(String authHeader) throws UnauthorizedException {
-
-        if (authHeader != null && authHeader.startsWith("Bearer ")) {
-            token = authHeader.substring(7);
-
-        }
-        else{
-            throw new UnauthorizedException("Access Denied");
-        }
-
-        try{
-            Boolean isValid = userClient.validateToken(token);
-
-            if(!isValid){
-
-                throw new UnauthorizedException("Access Denied");
-
-            }
-        }
-
-        catch (FeignException e) {
-
-            throw new UnauthorizedException("Token validation failed");
-        }
-    }
 
 
 }

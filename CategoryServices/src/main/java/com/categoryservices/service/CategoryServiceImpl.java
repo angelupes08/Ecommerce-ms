@@ -29,7 +29,7 @@ public class CategoryServiceImpl implements CategoryService {
     UserClient userClient;
 
     @Override
-    public List<Category> findCategories(String token) {
+    public List<Category> findCategories() {
 
         List<Category> categories = categoryRepo.findAll();
 
