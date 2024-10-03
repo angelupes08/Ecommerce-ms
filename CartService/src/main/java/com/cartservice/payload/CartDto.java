@@ -12,7 +12,5 @@ public class CartDto {
 
     private double price;
 
-    public double getPrice() {
-        return this.price*this.quantity;
-    }
+
 }

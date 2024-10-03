@@ -38,7 +38,7 @@ public class CartController {
 
         this.validateToken(authHeader);
 
-        Users user = userClient.getLoggedInUserInfo(authHeader);
+        Users user = userClient.getLoggedInUserInfo(authHeader.substring(7));
 
         CartItems cartItems = cartService.addProductstoCart(user,productId,quantity);
 
@@ -63,7 +63,7 @@ public class CartController {
 
         this.validateToken(authHeader);
 
-        Users user = userClient.getLoggedInUserInfo(authHeader);
+        Users user = userClient.getLoggedInUserInfo(authHeader.substring(7));
 
         Cart cart = cartService.findActiveCart(user);
 

@@ -11,7 +11,7 @@ public interface CartItemsRepository extends JpaRepository<CartItems,Long> {
 
     public List<CartItems> findByCart(Cart cart);
 
-    @Query("SELECT SUM(c.price*c.quantity) from CartItems c where c.cart=:cart group by c.cart")
+    @Query("SELECT SUM(c.price) from CartItems c where c.cart=:cart group by c.cart")
     public double findTotalPriceByCartId(Cart cart);
 
     public int findQuantityById(Long id);

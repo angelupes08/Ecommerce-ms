@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface CategoryService {
 
-    public List<Category> findCategories(String token);
+    public List<Category> findCategories();
 
     public Category findCategoryById(Long categoryId);
 
